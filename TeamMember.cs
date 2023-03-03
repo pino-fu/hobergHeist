@@ -16,5 +16,10 @@ namespace Heist
             SkillLevel = skillLevel;
             CourageLevel = courageLevel;
         }
+
+        public string Stringify()
+        {
+            return $"Name: {Name} / Skill Level: {SkillLevel} / Courage Score: {CourageLevel}";
+        }
     }
 }

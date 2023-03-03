@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Heist
 {
@@ -6,18 +7,36 @@ namespace Heist
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Plan your heist.");
-            Console.WriteLine();
-            Console.WriteLine("Enter your name: ");
-            string name = Console.ReadLine();
-            Console.WriteLine("What is your skill level?");
-            int skill = int.Parse(Console.ReadLine());
-            Console.WriteLine("On a scale of 0.0 to 2.0, how courageous does your mom say you are?");
-            double courage = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Plan your heist");
 
-            TeamMember newMember = new TeamMember(name, skill, courage);
+            string name = "Ben";
+            Dictionary<string, TeamMember> Team = new Dictionary<string, TeamMember>();
 
-            Console.WriteLine($"{newMember.Name} has a skill level of {newMember.SkillLevel} and, on a scale of 1 to 2, they're {newMember.CourageLevel} nervous");
+            while (name != "")
+            {
+                Console.Write("Enter new team member's name:");
+                name = Console.ReadLine();
+                    if (name == "")
+                    {
+                        continue;
+                    }
+
+                    Console.Write("Enter new team member's skill level:");
+                    int skillLevel = int.Parse(Console.ReadLine());
+
+                    Console.Write("Enter new team member's courage level:");
+                    double courageLevel = Convert.ToDouble(Console.ReadLine());
+
+                    TeamMember newMember = new TeamMember(name, skillLevel, courageLevel);
+
+                    Console.WriteLine($"{newMember.Name} has a skill level of {newMember.SkillLevel} and, on a scale of 0.1 to 2.0, their mom says their courage level is {newMember.CourageLevel}.");
+                    Team.Add($"{newMember.Name}", newMember);
+            }
+            Console.WriteLine($"Team Count: {Team.Count}");
+            foreach (KeyValuePair<string, TeamMember> each in Team)
+            {
+                Console.WriteLine(each.Value.Stringify());
+            }
         }
     }
 }
